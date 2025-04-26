@@ -1,0 +1,18 @@
+Se debe tener la red traffic-light creada antes de levantar los docker.
+
+En caso de no tener la red creada, el comando es:
+docker network create --driver=bridge --subnet=172.20.0.0/16 --gateway=172.20.0.1 traffic-light
+
+Para probar cada version se debera levantar y cerrar cada una por separado para probar la otra version.
+
+comandos para levantar y cerrar los dockers...
+
+primera version:
+
+docker-compose -f docker-compose-version1.yml up -d
+docker-compose -f docker-compose-version1.yml down
+
+segunda version (balancer):
+
+docker-compose -f docker-compose-balancer.yml up -d
+docker-compose -f docker-compose-balancer.yml down
