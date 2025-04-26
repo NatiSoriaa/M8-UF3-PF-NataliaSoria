@@ -1,17 +1,28 @@
+version: '3.8'
+
 services:
   red-app:
+    build:
+      context: ./red
+      dockerfile: Dockerfile
     image: trafficlight/red:v1.0
     container_name: red-app
     networks:
       - traffic-light
 
   yellow-app:
+    build:
+      context: ./yellow
+      dockerfile: Dockerfile
     image: trafficlight/yellow:v1.0
     container_name: yellow-app
     networks:
       - traffic-light
 
   green-app:
+    build:
+      context: ./green
+      dockerfile: Dockerfile
     image: trafficlight/green:v1.0
     container_name: green-app
     networks:
@@ -34,4 +45,8 @@ services:
 
 networks:
   traffic-light:
-    external: true
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
